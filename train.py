@@ -131,7 +131,7 @@ def train(config):
         dirpath=Path(config.result_path) / config.exp_name / config.exp_version,
         filename="artifacts",
         save_top_k=1,
-        save_last=False,
+        save_last=True,
         mode="min",
         every_n_epochs=3
     )
@@ -142,7 +142,7 @@ def train(config):
     trainer = pl.Trainer(
         num_nodes=config.get("num_nodes", 1),
         devices=torch.cuda.device_count(),
-        # strategy="ddp",
+        strategy="ddp",
         accelerator="gpu",
         plugins=custom_ckpt,
         max_epochs=config.max_epochs,

@@ -157,8 +157,11 @@ class BARTDecoder(nn.Module):
         self.decoder_layer = decoder_layer
         self.max_position_embeddings = max_position_embeddings
 
+        # self.tokenizer = XLMRobertaTokenizer.from_pretrained(
+        #     "hyunwoongko/asian-bart-ecjk" if not name_or_path else name_or_path
+        # )
         self.tokenizer = XLMRobertaTokenizer.from_pretrained(
-            "hyunwoongko/asian-bart-ecjk" if not name_or_path else name_or_path
+            "facebook/mbart-large-50" if not name_or_path else name_or_path
         )
 
         self.model = MBartForCausalLM(
